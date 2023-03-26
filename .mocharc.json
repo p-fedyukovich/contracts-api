@@ -1,0 +1,7 @@
+{
+  "timeout": 20000,
+  "recursive": true,
+  "exit": true,
+  "file": "./test/mocha-setup.js",
+  "package": ""
+}
