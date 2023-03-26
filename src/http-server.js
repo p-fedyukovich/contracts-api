@@ -4,6 +4,7 @@ const ContractsController = require('./controllers/contracts.controller')
 const JobsController = require('./controllers/jobs.controller')
 const { ValidationError } = require('./errors')
 const BalancesController = require('./controllers/balances.controller')
+const AdminController = require('./controllers/admin.controller')
 
 class HttpServer {
   app = express()
@@ -16,6 +17,7 @@ class HttpServer {
       .use('/contracts', new ContractsController().router)
       .use('/jobs', new JobsController().router)
       .use('/balances', new BalancesController().router)
+      .use('/admin', new AdminController().router)
       .use((error, req, res, next) => {
         if (error instanceof ValidationError) {
           return res.status(400).json({

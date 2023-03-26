@@ -5,7 +5,8 @@
   "dependencies": {
     "express": "4.18.2",
     "sequelize": "6.30.0",
-    "sqlite3": "5.1.6"
+    "sqlite3": "5.1.6",
+    "zod": "^3.21.4"
   },
   "scripts": {
     "start": "nodemon ./src/main.js",
