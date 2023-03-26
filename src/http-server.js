@@ -2,6 +2,7 @@ const express = require('express')
 const { sequelize } = require('./model')
 const ContractsController = require('./controllers/contracts.controller')
 const JobsController = require('./controllers/jobs.controller')
+const { ValidationError } = require('./errors')
 
 class HttpServer {
   app = express()
@@ -14,6 +15,11 @@ class HttpServer {
       .use('/contracts', new ContractsController().router)
       .use('/jobs', new JobsController().router)
       .use((error, req, res, next) => {
+        if (error instanceof ValidationError) {
+          return res.status(400).json({
+            message: error.message,
+          })
+        }
         console.error(error)
         res.status(500).json({
           message: 'Internal Server Error',

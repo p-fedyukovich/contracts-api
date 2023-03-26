@@ -8,12 +8,25 @@ class JobsController {
   jobsService = new JobsService()
 
   constructor() {
-    this.router.use(getProfile).get('/unpaid', errorHandler(this.getUnpaidJobs))
+    this.router
+      .use(getProfile)
+      .get('/unpaid', errorHandler(this.getUnpaidJobs))
+      .post('/:id/pay', errorHandler(this.pay))
   }
 
   getUnpaidJobs = async (req, res) => {
     const jobs = await this.jobsService.getUnpaidJobs(req.profile)
     res.json(jobs)
+  }
+
+  pay = async (req, res) => {
+    const job = await this.jobsService.pay(req.profile, req.params.id)
+
+    if (!job) {
+      return res.status(404).end()
+    }
+
+    res.json(job)
   }
 }
 
