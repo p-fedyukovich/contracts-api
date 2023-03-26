@@ -4,11 +4,7 @@ const { assert } = require('chai')
 const { ValidationError } = require('../errors')
 
 describe('JobsService', () => {
-  let service
-
-  before(() => {
-    service = new JobsService()
-  })
+  const service = new JobsService()
 
   describe('getUnpaidJobs', () => {
     it('should get job for client profile', async () => {
